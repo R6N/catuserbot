@@ -19,8 +19,7 @@ plugin_category = "utils"
 async def filter_incoming_handler(handler):
     try:
         if (
-            not (await handler.get_sender()).bot
-            and (handler.sender_id) != handler.client.uid
+            (handler.sender_id) != handler.client.uid
         ):
             name = handler.raw_text
             filters = get_filters(handler.chat_id)
