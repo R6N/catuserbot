@@ -181,15 +181,42 @@ async def bloom_pfploop():
         BLOOMSTART = gvarstatus("bloom") == "true"
 
 
-async def autoname_loop():
+async def autocalcy_loop():
     AUTONAMESTART = gvarstatus("autoname") == "true"
     while AUTONAMESTART:
-        DM = time.strftime("%d-%m-%y")
-        HM = time.strftime("%H:%M")
-        name = f"⌚️ {HM}||›  {DEFAULTUSER} ‹||📅 {DM}"
-        LOGS.info(name)
+        date = datetime.now().strftime("%l:%M%P | ")
+        n_time = ""
+        for i in date:
+            if i == "1":
+                i = i.replace(i, "𝟷")
+            elif i == "2":
+                i = i.replace(i, "𝟸")
+            elif i == "3":
+                i = i.replace(i, "𝟹")
+            elif i == "4":
+                i = i.replace(i, "𝟺")
+            elif i == "5":
+                i = i.replace(i, "𝟻")
+            elif i == "6":
+                i = i.replace(i, "𝟼")
+            elif i == "7":
+                i = i.replace(i, "𝟽")
+            elif i == "8":
+                i = i.replace(i, "𝟸")
+            elif i == "9":
+                i = i.replace(i, "𝟿")
+            elif i == "0":
+                i = i.replace(i, "𝟶")
+            elif i == "p":
+                i = i.replace(i, "𝙿")
+            elif i == "m":
+                i = i.replace(i, "𝙼")
+            elif i == "a":
+                i = i.replace(i, "𝙰")
+            n_time += i
+        LOGS.info(n_time)
         try:
-            await catub(functions.account.UpdateProfileRequest(first_name=name))
+            await catub(functions.account.UpdateProfileRequest(first_name=n_time))
         except FloodWaitError as ex:
             LOGS.warning(str(ex))
             await asyncio.sleep(ex.seconds)
@@ -200,12 +227,38 @@ async def autoname_loop():
 async def autobio_loop():
     AUTOBIOSTART = gvarstatus("autobio") == "true"
     while AUTOBIOSTART:
-        DMY = time.strftime("%d.%m.%Y")
-        HM = time.strftime("%H:%M:%S")
-        bio = f"📅 {DMY} | {DEFAULTUSERBIO} | ⌚️ {HM}"
-        LOGS.info(bio)
+        date = datetime.now().strftime("%Y-%m-%d, %l:%M%P")
+        b_time = ""
+        for i in date:
+            if i == "1":
+                i = i.replace(i, "𝟷")
+            elif i == "2":
+                i = i.replace(i, "𝟸")
+            elif i == "3":
+                i = i.replace(i, "𝟹")
+            elif i == "4":
+                i = i.replace(i, "𝟺")
+            elif i == "5":
+                i = i.replace(i, "𝟻")
+            elif i == "6":
+                i = i.replace(i, "𝟼")
+            elif i == "7":
+                i = i.replace(i, "𝟽")
+            elif i == "8":
+                i = i.replace(i, "𝟸")
+            elif i == "9":
+                i = i.replace(i, "𝟿")
+            elif i == "0":
+                i = i.replace(i, "𝟶")
+            elif i == "p":
+                i = i.replace(i, "𝙿")
+            elif i == "m":
+                i = i.replace(i, "𝙼")
+            elif i == "a":
+                i = i.replace(i, "𝙰")
+            b_time += i
         try:
-            await catub(functions.account.UpdateProfileRequest(about=bio))
+            await catub(functions.account.UpdateProfileRequest(about=b_time))
         except FloodWaitError as ex:
             LOGS.warning(str(ex))
             await asyncio.sleep(ex.seconds)
@@ -399,8 +452,8 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="autoname$",
-    command=("autoname", plugin_category),
+    pattern="autocalcy$",
+    command=("autocalcy", plugin_category),
     info={
         "header": "Changes your name with time",
         "description": "Updates your profile name along with time. Set AUTONAME var in heroku with your profile name,",
@@ -414,7 +467,7 @@ async def _(event):
         return await edit_delete(event, f"`Autoname is already enabled`")
     addgvar("autoname", True)
     await edit_delete(event, "`AutoName has been started by my Master `")
-    await autoname_loop()
+    await autocalcy_loop()
 
 
 @catub.cat_cmd(
@@ -551,5 +604,5 @@ catub.loop.create_task(autopfp_start())
 catub.loop.create_task(autopicloop())
 catub.loop.create_task(digitalpicloop())
 catub.loop.create_task(bloom_pfploop())
-catub.loop.create_task(autoname_loop())
+catub.loop.create_task(autocalcy_loop())
 catub.loop.create_task(autobio_loop())
