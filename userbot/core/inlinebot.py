@@ -465,36 +465,7 @@ async def inline_handler(event):  # sourcery no-metrics
                 )
             await event.answer([result] if result else None)
     else:
-        buttons = [
-            (
-                Button.url("Source code", "https://github.com/sandy1709/catuserbot"),
-                Button.url(
-                    "Deploy",
-                    "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack&template=https%3A%2F%2Fgithub.com%2FMr-confused%2Fcatpack",
-                ),
-            )
-        ]
-        markup = event.client.build_reply_markup(buttons)
-        photo = types.InputWebDocument(
-            url=CATLOGO, size=0, mime_type="image/jpeg", attributes=[]
-        )
-        text, msg_entities = await event.client._parse_message_text(
-            "𝗗𝗲𝗽𝗹𝗼𝘆 𝘆𝗼𝘂𝗿 𝗼𝘄𝗻 𝗖𝗮𝘁𝗨𝘀𝗲𝗿𝗯𝗼𝘁.", "md"
-        )
-        result = types.InputBotInlineResult(
-            id=str(uuid4()),
-            type="photo",
-            title="𝘾𝙖𝙩𝙐𝙨𝙚𝙧𝙗𝙤𝙩",
-            description="Deploy yourself",
-            url="https://github.com/sandy1709/catuserbot",
-            thumb=photo,
-            content=photo,
-            send_message=types.InputBotInlineMessageMediaAuto(
-                reply_markup=markup, message=text, entities=msg_entities
-            ),
-        )
-        await event.answer([result] if result else None)
-
+        pass
 
 @catub.tgbot.on(CallbackQuery(data=re.compile(b"close")))
 @check_owner
