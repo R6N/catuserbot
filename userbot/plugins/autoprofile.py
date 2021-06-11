@@ -181,7 +181,7 @@ async def bloom_pfploop():
         BLOOMSTART = gvarstatus("bloom") == "true"
 
 
-async def autocalcy_loop():
+async def autoname_loop():
     AUTONAMESTART = gvarstatus("autoname") == "true"
     while AUTONAMESTART:
         date = datetime.now().strftime("%l:%M%P | ")
@@ -452,8 +452,8 @@ async def _(event):
 
 
 @catub.cat_cmd(
-    pattern="autocalcy$",
-    command=("autocalcy", plugin_category),
+    pattern="autoname$",
+    command=("autoname", plugin_category),
     info={
         "header": "Changes your name with time",
         "description": "Updates your profile name along with time. Set AUTONAME var in heroku with your profile name,",
@@ -604,5 +604,5 @@ catub.loop.create_task(autopfp_start())
 catub.loop.create_task(autopicloop())
 catub.loop.create_task(digitalpicloop())
 catub.loop.create_task(bloom_pfploop())
-catub.loop.create_task(autocalcy_loop())
+catub.loop.create_task(autoname_loop())
 catub.loop.create_task(autobio_loop())
