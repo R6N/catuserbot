@@ -467,7 +467,7 @@ async def _(event):
         return await edit_delete(event, f"`Autoname is already enabled`")
     addgvar("autoname", True)
     await edit_delete(event, "`AutoName has been started by my Master `")
-    await autocalcy_loop()
+    await autoname_loop()
 
 
 @catub.cat_cmd(
