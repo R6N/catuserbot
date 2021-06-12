@@ -155,7 +155,7 @@ async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
     await upload_msg.delete()
     await c_q.edit(
         text=f"📹  <a href={yt_url}><b>{os.path.basename(Path(_path))}</b></a>",
-        file=uploaded_media.media,
+        file=media,
         parse_mode="html",
     )
 
