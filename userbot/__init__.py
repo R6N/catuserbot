@@ -26,11 +26,11 @@ else:
     UPSTREAM_REPO_URL = Config.UPSTREAM_REPO
 
 if Config.PRIVATE_GROUP_BOT_API_ID == 0:
-    BOTLOG = False
-    BOTLOG_CHATID = "me"
-else:
     BOTLOG = True
     BOTLOG_CHATID = Config.OWNER_ID
+else:
+    BOTLOG = True
+    BOTLOG_CHATID = Config.PRIVATE_GROUP_BOT_API_ID
 
 try:
     if Config.HEROKU_API_KEY is not None or Config.HEROKU_APP_NAME is not None:
