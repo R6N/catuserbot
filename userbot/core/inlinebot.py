@@ -56,7 +56,7 @@ def main_menu():
     buttons = [
         (
             Button.inline(
-                f"ℹ️ Info",
+                f"𝙸𝙽𝙵𝙾",
                 data="check",
             ),
         ),
