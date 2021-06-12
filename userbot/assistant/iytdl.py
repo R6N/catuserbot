@@ -106,14 +106,6 @@ async def ytdl_download_callback(c_q: CallbackQuery):  # sourcery no-metrics
     callback_continue = f"Downloading {media_type} Please Wait..."
     callback_continue += f"\n\nFormat Code : {disp_str}"
     await c_q.answer(callback_continue, alert=True)
-    try:
-        upload_msg = await c_q.client.send_message(BOTLOG_CHATID, "Uploading...")
-    except:
-        try:
-            upload_msg = await c_q.client.send_message(Config.OWNER_ID, "Uploading...")
-        excpet:
-           pass
-        pass
     yt_url = BASE_YT_URL + yt_code
     await c_q.edit(
         f"<b>⬇️ Downloading {media_type} ....</b>\n\n🔗  <a href={yt_url}> <b>Link</b></a>\n🆔  <b>Format Code</b> : {disp_str}",
