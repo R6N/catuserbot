@@ -487,10 +487,15 @@ async def endmute(event):
                     await event.client(
                         EditBannedRequest(event.chat_id, user.id, UNBAN_RIGHTS)
                     )
+                else:
+                    return await edit_or_reply(
+                        event,
+                        "`This user can already speak freely in this chat`",
+                    )
         except AttributeError:
             return await edit_or_reply(
                 event,
-                "`This user can already speak freely in this chat ~~lmfao sed rip~~`",
+                "`This user can already speak freely in this chat`",
             )
         except Exception as e:
             return await edit_or_reply(event, f"**Error : **`{str(e)}`")
