@@ -28,6 +28,7 @@ async def filter_incoming_handler(handler):
             for trigger in filters:
                 pattern = r"( |^|[^\w])" + re.escape(trigger.keyword) + r"( |$|[^\w])"
                 if re.search(pattern, name, flags=re.IGNORECASE):
+                    participants = await event.client.get_participants(chat)
                     count = len(participants)
                     mention = "<a href='tg://user?id={}'>{}</a>".format(a_user.id, a_user.first_name)
                     my_mention = "<a href='tg://user?id={}'>{}</a>".format(me.id, me.first_name)
