@@ -66,8 +66,8 @@ async def filter_incoming_handler(handler):
                             my_username=my_username,
                             my_mention=my_mention,
                         ))
-    except AttributeError:
-        pass
+    except Exception as e:
+        print(str(e))
 
 
 @catub.cat_cmd(
