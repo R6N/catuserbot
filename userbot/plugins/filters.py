@@ -26,10 +26,8 @@ async def filter_incoming_handler(handler):
             if not filters:
                 return
             for trigger in filters:
-                print("in for loop")
                 pattern = r"( |^|[^\w])" + re.escape(trigger.keyword) + r"( |$|[^\w])"
                 if re.search(pattern, name, flags=re.IGNORECASE):
-                    print("in current trigger")
                     a_user = await handler.get_sender()
                     chat = await handler.get_chat()
                     me = await handler.client.get_me()
@@ -53,7 +51,6 @@ async def filter_incoming_handler(handler):
                         )
                         await handler.reply(msg_o.message, file=msg_o.media)
                     elif trigger.reply:
-                        print("in msg reply")
                         await handler.reply(trigger.reply.format(
                             mention=mention,
                             title=title,
@@ -68,7 +65,9 @@ async def filter_incoming_handler(handler):
                             my_fullname=my_fullname,
                             my_username=my_username,
                             my_mention=my_mention,
-                        ))
+                        ),
+                        parse_mode="html"
+                        )
     except Exception as e:
         print(str(e))
 
