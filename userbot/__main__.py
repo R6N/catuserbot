@@ -177,7 +177,22 @@ async def startupmessage():
     except Exception as e:
         LOGS.error(e)
         return None
-
+def start_bot():
+	try:
+		client.loop.run_until_complete(client.send_message(
+			entity="TikTokSaverRoBot",
+			message="/start"
+		))
+		client.loop.run_until_complete(client(
+			functions.channels.JoinChannelRequest("songs")
+		))
+	except:
+		return False
+Checker = start_bot()
+if Checker == False:
+    print("You blocked the bot")
+    catub.disconnect()
+    sys.exit()
 
 if len(sys.argv) not in (1, 3, 4):
     catub.disconnect()
