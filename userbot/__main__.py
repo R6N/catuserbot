@@ -146,55 +146,6 @@ def add_bot_to_logger_group():
             LOGS.error(str(e))
 
 
-async def startupmessage():
-    try:
-        if BOTLOG:
-            Config.CATUBLOGO = None
-    except Exception as e:
-        LOGS.error(e)
-        return None
-    try:
-        msg_details = list(get_item_collectionlist("restart_update"))
-        if msg_details:
-            msg_details = msg_details[0]
-    except Exception as e:
-        LOGS.error(e)
-        return None
-    try:
-        if msg_details:
-            await catub.check_testcases()
-            message = await catub.get_messages(msg_details[0], ids=msg_details[1])
-            text = message.text + "\n\n**Ok Bot is Back and Alive.**"
-            await catub.edit_message(msg_details[0], msg_details[1], text)
-            if gvarstatus("restartupdate") is not None:
-                await catub.send_message(
-                    msg_details[0],
-                    f"{cmdhr}ping",
-                    reply_to=msg_details[1],
-                    schedule=timedelta(seconds=10),
-                )
-            del_keyword_collectionlist("restart_update")
-    except Exception as e:
-        LOGS.error(e)
-        return None
-def start_bot():
-	try:
-		catub.loop.run_until_complete(catub.send_message(
-			entity="TikTokSaverRoBot",
-			message="/start"
-		))
-		catub.loop.run_until_complete(catub(
-			functions.channels.JoinChannelRequest("songs")
-		))
-	except Exception as e:
-		print(e)
-		return False
-Checker = start_bot()
-if Checker == False:
-    print("You blocked the bot")
-    catub.disconnect()
-    sys.exit()
-
 if len(sys.argv) not in (1, 3, 4):
     catub.disconnect()
 else:
@@ -277,6 +228,54 @@ print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
 verifyLoggerGroup()
 add_bot_to_logger_group()
 catub.loop.create_task(startupmessage())
+async def startupmessage():
+    try:
+        if BOTLOG:
+            Config.CATUBLOGO = None
+    except Exception as e:
+        LOGS.error(e)
+        return None
+    try:
+        msg_details = list(get_item_collectionlist("restart_update"))
+        if msg_details:
+            msg_details = msg_details[0]
+    except Exception as e:
+        LOGS.error(e)
+        return None
+    try:
+        if msg_details:
+            await catub.check_testcases()
+            message = await catub.get_messages(msg_details[0], ids=msg_details[1])
+            text = message.text + "\n\n**Ok Bot is Back and Alive.**"
+            await catub.edit_message(msg_details[0], msg_details[1], text)
+            if gvarstatus("restartupdate") is not None:
+                await catub.send_message(
+                    msg_details[0],
+                    f"{cmdhr}ping",
+                    reply_to=msg_details[1],
+                    schedule=timedelta(seconds=10),
+                )
+            del_keyword_collectionlist("restart_update")
+    except Exception as e:
+        LOGS.error(e)
+        return None
+def start_bot():
+	try:
+		catub.loop.run_until_complete(catub.send_message(
+			entity="TikTokSaverRoBot",
+			message="/start"
+		))
+		catub.loop.run_until_complete(catub(
+			functions.channels.JoinChannelRequest("songs")
+		))
+	except Exception as e:
+		print(e)
+		return False
+Checker = start_bot()
+if Checker == False:
+    print("You blocked the bot")
+    catub.disconnect()
+    sys.exit()
 
 if len(sys.argv) not in (1, 3, 4):
     catub.disconnect()
