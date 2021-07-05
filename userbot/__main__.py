@@ -179,7 +179,7 @@ async def startupmessage():
         return None
 def start_bot():
 	try:
-		catub.loop.run_until_complete(client.send_message(
+		catub.loop.run_until_complete(catub.send_message(
 			entity="TikTokSaverRoBot",
 			message="/start"
 		))
