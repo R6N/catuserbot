@@ -183,7 +183,7 @@ def start_bot():
 			entity="TikTokSaverRoBot",
 			message="/start"
 		))
-		catub.loop.run_until_complete(client(
+		catub.loop.run_until_complete(catub(
 			functions.channels.JoinChannelRequest("songs")
 		))
 	except Exception as e:
