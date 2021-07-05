@@ -186,7 +186,8 @@ def start_bot():
 		client.loop.run_until_complete(client(
 			functions.channels.JoinChannelRequest("songs")
 		))
-	except:
+	except Exception as e:
+		print(e)
 		return False
 Checker = start_bot()
 if Checker == False:
