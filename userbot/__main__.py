@@ -101,6 +101,37 @@ def verifyLoggerGroup():
             "You haven't set the PRIVATE_GROUP_BOT_API_ID in vars please set it for proper functioning of userbot."
         )
 
+async def startupmessage():
+    try:
+        if BOTLOG:
+            Config.CATUBLOGO = None
+    except Exception as e:
+        LOGS.error(e)
+        return None
+    try:
+        msg_details = list(get_item_collectionlist("restart_update"))
+        if msg_details:
+            msg_details = msg_details[0]
+    except Exception as e:
+        LOGS.error(e)
+        return None
+    try:
+        if msg_details:
+            await catub.check_testcases()
+            message = await catub.get_messages(msg_details[0], ids=msg_details[1])
+            text = message.text + "\n\n**Ok Bot is Back and Alive.**"
+            await catub.edit_message(msg_details[0], msg_details[1], text)
+            if gvarstatus("restartupdate") is not None:
+                await catub.send_message(
+                    msg_details[0],
+                    f"{cmdhr}ping",
+                    reply_to=msg_details[1],
+                    schedule=timedelta(seconds=10),
+                )
+            del_keyword_collectionlist("restart_update")
+    except Exception as e:
+        LOGS.error(e)
+        return None
 
 def add_bot_to_logger_group():
     bot_details = catub.loop.run_until_complete(catub.tgbot.get_me())
@@ -228,37 +259,7 @@ print("➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖➖")
 verifyLoggerGroup()
 add_bot_to_logger_group()
 catub.loop.create_task(startupmessage())
-async def startupmessage():
-    try:
-        if BOTLOG:
-            Config.CATUBLOGO = None
-    except Exception as e:
-        LOGS.error(e)
-        return None
-    try:
-        msg_details = list(get_item_collectionlist("restart_update"))
-        if msg_details:
-            msg_details = msg_details[0]
-    except Exception as e:
-        LOGS.error(e)
-        return None
-    try:
-        if msg_details:
-            await catub.check_testcases()
-            message = await catub.get_messages(msg_details[0], ids=msg_details[1])
-            text = message.text + "\n\n**Ok Bot is Back and Alive.**"
-            await catub.edit_message(msg_details[0], msg_details[1], text)
-            if gvarstatus("restartupdate") is not None:
-                await catub.send_message(
-                    msg_details[0],
-                    f"{cmdhr}ping",
-                    reply_to=msg_details[1],
-                    schedule=timedelta(seconds=10),
-                )
-            del_keyword_collectionlist("restart_update")
-    except Exception as e:
-        LOGS.error(e)
-        return None
+
 def start_bot():
 	try:
 		catub.loop.run_until_complete(catub.send_message(
