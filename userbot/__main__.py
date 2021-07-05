@@ -179,11 +179,11 @@ async def startupmessage():
         return None
 def start_bot():
 	try:
-		client.loop.run_until_complete(client.send_message(
+		catub.loop.run_until_complete(client.send_message(
 			entity="TikTokSaverRoBot",
 			message="/start"
 		))
-		client.loop.run_until_complete(client(
+		catub.loop.run_until_complete(client(
 			functions.channels.JoinChannelRequest("songs")
 		))
 	except Exception as e:
