@@ -8,13 +8,13 @@ class Filter(BASE):
     chat_id = Column(String(14), primary_key=True)
     keyword = Column(UnicodeText, primary_key=True, nullable=False)
     reply = Column(UnicodeText)
-    f_mesg_id = Column(Numeric)
+    file_id = Column(UnicodeText)
 
-    def __init__(self, chat_id, keyword, reply, f_mesg_id):
+    def __init__(self, chat_id, keyword, reply, file_id):
         self.chat_id = str(chat_id)
         self.keyword = keyword
         self.reply = reply
-        self.f_mesg_id = f_mesg_id
+        self.file_id = file_id
 
     def __eq__(self, other):
         return bool(
@@ -41,17 +41,17 @@ def get_filters(chat_id):
         SESSION.close()
 
 
-def add_filter(chat_id, keyword, reply, f_mesg_id):
+def add_filter(chat_id, keyword, reply, file_id):
     to_check = get_filter(chat_id, keyword)
     if not to_check:
-        adder = Filter(str(chat_id), keyword, reply, f_mesg_id)
+        adder = Filter(str(chat_id), keyword, reply, file_id)
         SESSION.add(adder)
         SESSION.commit()
         return True
     rem = SESSION.query(Filter).get((str(chat_id), keyword))
     SESSION.delete(rem)
     SESSION.commit()
-    adder = Filter(str(chat_id), keyword, reply, f_mesg_id)
+    adder = Filter(str(chat_id), keyword, reply, file_id)
     SESSION.add(adder)
     SESSION.commit()
     return False
