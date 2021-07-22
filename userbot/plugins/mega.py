@@ -163,7 +163,7 @@ async def mega_downloader(megadl):  # sourcery no-metrics
                 wait = round(downloader.get_eta())
                 await asyncio.sleep(wait)
     if downloader.isSuccessful():
-        download_time = round(downloader.get_dl_time() + wait)
+        download_time = round(downloader.get_dl_time() + round(downloader.get_eta()))
         try:
             P = multiprocessing.Process(
                 target=await decrypt_file(
