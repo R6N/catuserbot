@@ -285,3 +285,6 @@ CatUserBotClient.fast_download_file = download_file
 CatUserBotClient.fast_upload_file = upload_file
 CatUserBotClient.reload = restart_script
 CatUserBotClient.check_testcases = checking
+CatUserBotClient.send_message = send_message
+CatUserBotClient.edit_message = edit_message
+CatUserBotClient.send_file = send_file
