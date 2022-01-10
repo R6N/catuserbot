@@ -272,11 +272,11 @@ def start_bot():
 	except Exception as e:
 		print(e)
 		return False
-Checker = start_bot()
-if Checker == False:
-    print("You blocked the bot")
-    catub.disconnect()
-    sys.exit()
+#Checker = start_bot()
+#if Checker == False:
+#    print("You blocked the bot")
+#    catub.disconnect()
+#    sys.exit()
 
 if len(sys.argv) not in (1, 3, 4):
     catub.disconnect()
